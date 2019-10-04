@@ -17,18 +17,3 @@ class ViewModelFactoryModule {
         return ViewModelFactory(providerMap)
     }
 }
-
-//@Module
-//abstract class ViewModelFactoryModule{
-//
-//    @Module
-//    companion object{
-//        @JvmStatic
-//        @Provides
-//        @Singleton
-//        fun viewModelFactory(providerMap: Map<Class<out ViewModel>, Provider<ViewModel>>): ViewModelProvider.Factory {
-//            return NewViewModelFactory(providerMap)
-//        }
-//    }
-//
-//}
