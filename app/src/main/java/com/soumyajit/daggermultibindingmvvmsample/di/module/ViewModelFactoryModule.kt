@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.soumyajit.daggermultibindingmvvmsample.Factory.ViewModelFactory
 import dagger.Module
 import dagger.Provides
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
@@ -12,7 +13,22 @@ class ViewModelFactoryModule {
 
     @Provides
     @Singleton
-    fun viewModelFactory(providerMap: Map<Class<out ViewModel>, ViewModel>): ViewModelProvider.Factory {
+    fun viewModelFactory(providerMap: Map<Class<out ViewModel>, Provider<ViewModel>>): ViewModelProvider.Factory {
         return ViewModelFactory(providerMap)
     }
 }
+
+//@Module
+//abstract class ViewModelFactoryModule{
+//
+//    @Module
+//    companion object{
+//        @JvmStatic
+//        @Provides
+//        @Singleton
+//        fun viewModelFactory(providerMap: Map<Class<out ViewModel>, Provider<ViewModel>>): ViewModelProvider.Factory {
+//            return NewViewModelFactory(providerMap)
+//        }
+//    }
+//
+//}
