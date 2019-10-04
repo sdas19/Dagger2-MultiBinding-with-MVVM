@@ -4,9 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.soumyajit.daggermultibindingmvvmsample.ApiClient
-import com.soumyajit.daggermultibindingmvvmsample.DataModel
-import com.soumyajit.daggermultibindingmvvmsample.DisposableManager
+import com.soumyajit.daggermultibindingmvvmsample.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
@@ -18,7 +16,7 @@ class MainActivityViewModel
     val dataResponse : MutableLiveData<DataModel> = MutableLiveData()
 
     init {
-        DisposableManager.add(
+        addToDisposable(
             apiClient.getData().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -27,10 +25,11 @@ class MainActivityViewModel
                     {error -> Log.i(TAG,error.toString())}
                 )
         )
+
     }
 
     override fun onCleared() {
         super.onCleared()
-        DisposableManager.dispose()
+        removeAllDisposables()
     }
 }
