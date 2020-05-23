@@ -18,5 +18,4 @@ class UsersAdapter : ListAdapter<SingleDataModel, UserViewHolder>(UserItemDiffCa
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bindTo(getItem(position))
     }
-
 }

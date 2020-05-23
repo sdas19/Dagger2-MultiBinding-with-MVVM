@@ -1,6 +1,6 @@
 package com.soumyajit.daggermultibindingmvvmsample.di.module
 
-import com.soumyajit.daggermultibindingmvvmsample.activity.MainActivity
+import com.soumyajit.daggermultibindingmvvmsample.activity.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

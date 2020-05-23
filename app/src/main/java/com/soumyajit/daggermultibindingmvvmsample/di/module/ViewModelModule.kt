@@ -1,7 +1,7 @@
 package com.soumyajit.daggermultibindingmvvmsample.di.module
 
 import androidx.lifecycle.ViewModel
-import com.soumyajit.daggermultibindingmvvmsample.activity.MainActivityViewModel
+import com.soumyajit.daggermultibindingmvvmsample.activity.main.MainActivityViewModel
 import com.soumyajit.daggermultibindingmvvmsample.di.annotation.ViewModelKey
 import dagger.Binds
 import dagger.Module

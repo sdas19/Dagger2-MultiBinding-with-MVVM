@@ -1,4 +1,4 @@
-package com.soumyajit.daggermultibindingmvvmsample.activity
+package com.soumyajit.daggermultibindingmvvmsample.activity.main
 
 import com.soumyajit.daggermultibindingmvvmsample.SingleDataModel
 

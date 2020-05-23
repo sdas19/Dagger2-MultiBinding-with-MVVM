@@ -17,6 +17,5 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
             .centerCrop()
             .placeholder(R.drawable.user_avatar)
             .into(itemView.image);
-
     }
 }
