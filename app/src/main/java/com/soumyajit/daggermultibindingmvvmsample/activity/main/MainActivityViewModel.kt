@@ -11,8 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivityViewModel
-    @Inject constructor(private val context : Context,
-                        private val apiClient: ApiClient,
+    @Inject constructor(private val apiClient: ApiClient,
                         private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider)
     : ViewModel() {
     val TAG = MainActivityViewModel::class.java.simpleName
