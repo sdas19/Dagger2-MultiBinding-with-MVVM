@@ -7,12 +7,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.soumyajit.daggermultibindingmvvmsample.*
+import com.soumyajit.daggermultibindingmvvmsample.db.UsersDao
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivityViewModel
     @Inject constructor(private val apiClient: ApiClient,
-                        private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider)
+                        private val usersDao: UsersDao)
     : ViewModel() {
     val TAG = MainActivityViewModel::class.java.simpleName
     private val _state : MutableLiveData<MainActivityViewState> = MutableLiveData()
@@ -23,29 +26,17 @@ class MainActivityViewModel
         getData()
     }
 
+    @ExperimentalCoroutinesApi
     private fun getData() {
         viewModelScope.launch {
-            val response = runIO(coroutinesDispatcherProvider){apiClient.getData()}
-            when(response){
-                is ResultHandler.Error -> {
-                    val throwable = response.throwable
-                    Log.i(TAG,throwable.toString())
-                    _state.postValue(
-                        MainActivityViewState.ShowError(
-                            throwable
-                        )
-                    )
-                }
-                is ResultHandler.Success -> {
-                    val result = response.data
-                    Log.i(TAG,result.toString())
-                    _state.postValue(
-                        MainActivityViewState.ShowData(
-                            result.data
-                        )
-                    )
-                }
-            }
+            flowOf(apiClient.getData())
+                .catch { throwable -> _state.postValue(
+                    MainActivityViewState.ShowError(throwable)) }
+                .map { result ->
+                    if(!result.data.isNullOrEmpty()){
+                        usersDao.insertUsers(result.data)
+                    }
+                }.collect()
         }
     }
 }

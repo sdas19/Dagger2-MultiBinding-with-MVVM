@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.soumyajit.daggermultibindingmvvmsample.R
-import com.soumyajit.daggermultibindingmvvmsample.SingleDataModel
+import com.soumyajit.daggermultibindingmvvmsample.Users
 
-class UsersAdapter : ListAdapter<SingleDataModel, UserViewHolder>(UserItemDiffCallback()) {
+class UsersAdapter : ListAdapter<Users, UserViewHolder>(UserItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): UserViewHolder {
         return UserViewHolder(
