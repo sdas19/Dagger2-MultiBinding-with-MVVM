@@ -2,10 +2,7 @@ package com.soumyajit.daggermultibindingmvvmsample.di.component
 
 import android.app.Application
 import com.soumyajit.daggermultibindingmvvmsample.DaggerMVVMMultiBindingApplication
-import com.soumyajit.daggermultibindingmvvmsample.di.module.ActivityBuilderModule
-import com.soumyajit.daggermultibindingmvvmsample.di.module.ApiModule
-import com.soumyajit.daggermultibindingmvvmsample.di.module.AppModule
-import com.soumyajit.daggermultibindingmvvmsample.di.module.ViewModelFactoryModule
+import com.soumyajit.daggermultibindingmvvmsample.di.module.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -17,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [AndroidSupportInjectionModule::class, ActivityBuilderModule::class,
-        AppModule::class, ApiModule::class, ViewModelFactoryModule::class]
+        AppModule::class, ApiModule::class, DatabaseModule::class, ViewModelFactoryModule::class]
 )
 interface AppComponent : AndroidInjector<DaggerMVVMMultiBindingApplication> {
 

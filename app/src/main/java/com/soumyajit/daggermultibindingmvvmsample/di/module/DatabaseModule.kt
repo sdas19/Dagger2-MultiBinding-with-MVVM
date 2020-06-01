@@ -22,7 +22,7 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideUserDao(userDatabase: UsersDatabase): UsersDao? {
+    fun provideUserDao(userDatabase: UsersDatabase): UsersDao {
         return userDatabase.usersDao()
     }
 }

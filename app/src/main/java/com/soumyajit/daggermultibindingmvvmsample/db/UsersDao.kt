@@ -27,5 +27,9 @@ abstract class UsersDao {
     @ExperimentalCoroutinesApi
     fun getUserDistinctUntilChanged(id:String) =
         getUser(id).distinctUntilChanged()
+
+    @ExperimentalCoroutinesApi
+    fun getAllUsersDistinctUntilChanged() =
+        getAllUsers().distinctUntilChanged()
   
 }
