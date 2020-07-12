@@ -2,6 +2,7 @@ package com.soumyajit.daggermultibindingmvvmsample.activity.main
 
 import android.content.Context
 import android.util.Log
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,8 +12,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivityViewModel
-    @Inject constructor(private val apiClient: ApiClient,
-                        private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider)
+    @ViewModelInject constructor(private val apiClient: ApiClient,
+                                  private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider)
     : ViewModel() {
     val TAG = MainActivityViewModel::class.java.simpleName
     private val _state : MutableLiveData<MainActivityViewState> = MutableLiveData()

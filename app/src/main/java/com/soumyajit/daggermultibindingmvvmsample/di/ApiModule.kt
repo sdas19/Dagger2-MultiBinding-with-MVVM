@@ -1,12 +1,15 @@
-package com.soumyajit.daggermultibindingmvvmsample.di.module
+package com.soumyajit.daggermultibindingmvvmsample.di
 
 import android.app.Application
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.soumyajit.daggermultibindingmvvmsample.ApiClient
+import com.soumyajit.daggermultibindingmvvmsample.BuildConfig
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -16,6 +19,7 @@ import javax.inject.Singleton
 
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class ApiModule() {
 
     @Provides
@@ -43,17 +47,17 @@ class ApiModule() {
 
     @Provides
     @Singleton
-    fun provideRetrofit(@Named("baseUrl") baseUrl: String,gson: Gson, okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl(baseUrl)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideApiClient(retrofit : Retrofit) : ApiClient{
+    fun provideApiClient(retrofit : Retrofit) : ApiClient {
         return retrofit.create(ApiClient::class.java)
     }
 }
