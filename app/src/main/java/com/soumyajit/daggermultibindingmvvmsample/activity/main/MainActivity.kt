@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.soumyajit.daggermultibindingmvvmsample.R
 import com.soumyajit.daggermultibindingmvvmsample.SingleDataModel
