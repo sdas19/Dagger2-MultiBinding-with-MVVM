@@ -1,4 +1,4 @@
-package com.soumyajit.daggermultibindingmvvmsample.activity
+package com.soumyajit.daggermultibindingmvvmsample
 
 import android.app.Activity
 import android.widget.Toast

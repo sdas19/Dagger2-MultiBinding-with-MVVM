@@ -12,6 +12,7 @@
             android:layout_height="@dimen/dimen_40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/user_avatar"
             tools:background="@tools:sample/avatars" />
 
     <androidx.appcompat.widget.AppCompatTextView

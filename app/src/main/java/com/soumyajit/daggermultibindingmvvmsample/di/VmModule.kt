@@ -1,24 +1,20 @@
 package com.soumyajit.daggermultibindingmvvmsample.di
 
-import android.app.Application
+import com.soumyajit.daggermultibindingmvvmsample.repository.StarWarsPeopleRepository
+import com.soumyajit.daggermultibindingmvvmsample.repository.StarWarsPeopleRepositoryImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.components.ApplicationComponent
-import dagger.hilt.android.scopes.ActivityRetainedScoped
-import okhttp3.Cache
-import javax.inject.Singleton
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-class VmModule {
+abstract class VmModule {
 
-    @Provides
-    @ActivityRetainedScoped
-    fun provideHttpCache(application: Application): Cache {
-        val cacheSize = 10 * 1024 * 1024
-        return Cache(application.cacheDir, cacheSize.toLong())
-    }
-
+    @ExperimentalCoroutinesApi
+    @Binds
+    abstract fun bindStarWarsPeopleRepository(
+        starWarsPeopleRepositoryImpl: StarWarsPeopleRepositoryImpl
+    ): StarWarsPeopleRepository
 }

@@ -4,7 +4,7 @@ import android.app.Application
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.soumyajit.daggermultibindingmvvmsample.ApiClient
+import com.soumyajit.daggermultibindingmvvmsample.useCase.SwapiApiClient
 import com.soumyajit.daggermultibindingmvvmsample.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -14,13 +14,11 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
-
 
 @Module
 @InstallIn(ApplicationComponent::class)
-class ApiModule() {
+class ApiModule {
 
     @Provides
     @Singleton
@@ -57,7 +55,7 @@ class ApiModule() {
 
     @Provides
     @Singleton
-    fun provideApiClient(retrofit : Retrofit) : ApiClient {
-        return retrofit.create(ApiClient::class.java)
+    fun provideApiClient(retrofit : Retrofit) : SwapiApiClient {
+        return retrofit.create(SwapiApiClient::class.java)
     }
 }
