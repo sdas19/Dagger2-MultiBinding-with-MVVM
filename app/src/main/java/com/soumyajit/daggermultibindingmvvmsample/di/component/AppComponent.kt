@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [AndroidSupportInjectionModule::class, ActivityBuilderModule::class,
-        AppModule::class, ApiModule::class, DatabaseModule::class, ViewModelFactoryModule::class]
+        AppModule::class, ApiModule::class, ViewModelFactoryModule::class]
 )
 interface AppComponent : AndroidInjector<DaggerMVVMMultiBindingApplication> {
 

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:dist="http://schemas.android.com/apk/distribution"
-          package="com.soumyajit.daggermultibindingmvvmsample">
-    <uses-permission android:name="android.permission.INTERNET"/>
-<!--
-    <dist:module dist:instant="true"/>
--->
+        xmlns:dist="http://schemas.android.com/apk/distribution"
+        package="com.soumyajit.daggermultibindingmvvmsample">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
             android:name=".DaggerMVVMMultiBindingApplication"
@@ -15,11 +13,12 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".activity.SampleActivity"></activity>
         <activity android:name=".activity.main.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

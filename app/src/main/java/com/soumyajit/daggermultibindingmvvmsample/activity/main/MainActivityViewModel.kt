@@ -1,46 +1,46 @@
 package com.soumyajit.daggermultibindingmvvmsample.activity.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.soumyajit.daggermultibindingmvvmsample.*
-import com.soumyajit.daggermultibindingmvvmsample.db.UsersDao
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlinx.coroutines.withContext
 
-@ExperimentalCoroutinesApi
-class MainActivityViewModel
-    @Inject constructor(private val apiClient: ApiClient,
-                        private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider,
-                        private val usersDao: UsersDao)
-    : ViewModel() {
-    private val _state : MutableLiveData<MainActivityViewState> = MutableLiveData()
-    val state: LiveData<MainActivityViewState> = _state
+class MainActivityViewModel @Inject constructor(
+    private val apiClient: ApiClient,
+    private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider
+) : ViewModel() {
+
+    private val _state: MutableStateFlow<MainActivityViewState> = MutableStateFlow(MainActivityViewState.ShowLoading)
+    val state: StateFlow<MainActivityViewState> = _state
 
     init {
-        _state.postValue(MainActivityViewState.ShowLoading)
         getData()
     }
 
     private fun getData() {
         viewModelScope.launch {
-            withContext(coroutinesDispatcherProvider.io){
-                flowOf(apiClient.getData())
-                    .catch { throwable ->
-                        _state.postValue(MainActivityViewState.ShowError(
-                            throwable)
-                        )
-                    }.map { result ->
-                        if(!result.data.isNullOrEmpty()){
-                            usersDao.deleteAllUsers()
-                            usersDao.insertUsers(result.data)
-                        }
-                    }.collect()
+            when(val response = runIO(coroutinesDispatcherProvider){apiClient.getData()}){
+                is ResultHandler.Error -> {
+                    _state.value = MainActivityViewState.ShowError(response.throwable)
+                }
+                is ResultHandler.Success -> {
+                    val result = response.data
+                    Log.i(TAG,result.toString())
+                    _state.value = MainActivityViewState.ShowData(result.data)
+                }
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.i(TAG, "onCleared")
+    }
+
+    companion object {
+        private val TAG = MainActivityViewModel::class.java.simpleName
     }
 }
